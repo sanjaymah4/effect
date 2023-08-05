@@ -1,0 +1,16 @@
+# Use an official Perl runtime as a parent image
+FROM perl:latest
+
+# Set the working directory to /app
+WORKDIR /app
+
+# Install Smokeping dependencies
+RUN apt-get update && apt-get install -y \
+    smokeping \
+    && rm -rf /var/lib/apt/lists/*
+
+# Expose Smokeping's web server port
+EXPOSE 80
+
+# Start Smokeping
+CMD [ "smokeping", "--nodaemon" ]
